@@ -25,8 +25,8 @@ function App() {
     }
   };
 
-  const handleStatusUpdate = async (reportId, newStatus) => {
-    const result = await updateReportStatus(reportId, newStatus);
+  const handleStatusUpdate = async (reportId, newStatus, afterPhoto = null, notes = '') => {
+    const result = await updateReportStatus(reportId, newStatus, afterPhoto, notes);
     
     if (!result.success) {
       alert("Failed to update report status. Please try again.");

@@ -29,8 +29,9 @@
 #### 4. **Report Tracking**
 - View your submitted reports
 - Check status (Pending/Completed)
-- See collection history
-- Monitor progress
+- **See before/after photos** of completed collections ⭐ NEW
+- Visual confirmation of cleanup
+- Driver completion notes
 
 ---
 
@@ -54,8 +55,13 @@
 - Turn-by-turn directions
 - Location previews
 
-#### 4. **Quick Actions**
-- One-tap collection completion
+#### 4. **Photo-Based Completion** ⭐ NEW
+- **Required "After" photos** for every collection
+- Side-by-side before/after comparison
+- Optional completion notes
+- Visual proof of work completed
+
+#### 5. **Quick Actions**
 - Status updates
 - Photo evidence viewing
 - Report details

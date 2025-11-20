@@ -31,8 +31,12 @@ export const submitReport = async (formData, userId) => {
 
 /**
  * Update report status (for drivers)
+ * @param {string} reportId - Report ID
+ * @param {string} newStatus - New status
+ * @param {string} afterPhoto - Base64 image data URL
+ * @param {string} notes - Optional completion notes
  */
-export const updateReportStatus = async (reportId, newStatus) => {
+export const updateReportStatus = async (reportId, newStatus, afterPhoto = null, notes = '') => {
   try {
     const reportRef = doc(
       db, 
@@ -44,10 +48,20 @@ export const updateReportStatus = async (reportId, newStatus) => {
       reportId
     );
     
-    await updateDoc(reportRef, {
+    const updateData = {
       status: newStatus,
       resolvedAt: serverTimestamp()
-    });
+    };
+
+    // Add after photo and notes if provided
+    if (afterPhoto) {
+      updateData.afterPhoto = afterPhoto;
+    }
+    if (notes) {
+      updateData.completionNotes = notes;
+    }
+    
+    await updateDoc(reportRef, updateData);
     
     return { success: true };
   } catch (error) {

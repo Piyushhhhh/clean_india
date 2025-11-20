@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapPin, CheckCircle, Image as ImageIcon } from 'lucide-react';
+import CompletionModal from './CompletionModal';
 
 const TaskCard = ({ report, onComplete }) => {
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleCompleteClick = () => {
+    setShowCompletionModal(true);
+  };
+
+  const handleModalComplete = async (reportId, afterPhoto, notes) => {
+    setIsSubmitting(true);
+    await onComplete(reportId, afterPhoto, notes);
+    setIsSubmitting(false);
+    setShowCompletionModal(false);
+  };
   const isPriority = report.severity === 'Emergency' || 
                      report.severity === 'High' || 
                      report.wasteType === 'Hazardous';
@@ -55,7 +69,7 @@ const TaskCard = ({ report, onComplete }) => {
         
         <div className="flex flex-col justify-center pl-2 border-l border-gray-100">
           <button
-            onClick={() => onComplete(report.id)}
+            onClick={handleCompleteClick}
             className="bg-green-600 text-white p-3 rounded-lg shadow hover:bg-green-700 active:scale-95 transition-all flex flex-col items-center w-20"
           >
             <CheckCircle className="h-6 w-6 mb-1" />
@@ -63,6 +77,16 @@ const TaskCard = ({ report, onComplete }) => {
           </button>
         </div>
       </div>
+
+      {/* Completion Modal */}
+      {showCompletionModal && (
+        <CompletionModal
+          report={report}
+          onClose={() => setShowCompletionModal(false)}
+          onComplete={handleModalComplete}
+          isSubmitting={isSubmitting}
+        />
+      )}
     </div>
   );
 };

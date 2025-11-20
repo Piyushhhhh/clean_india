@@ -33,7 +33,8 @@ CleanConnect India is a modern web application that connects citizens with waste
 - **📈 Real-time Stats**: Track pending stops, completed collections, and efficiency
 - **🎯 Smart Prioritization**: Emergency and hazardous waste highlighted
 - **🧭 Navigation**: Direct Google Maps integration
-- **✅ Quick Actions**: One-tap collection completion
+- **📸 After Photos**: Required completion photos with before/after comparison
+- **✅ Proof of Work**: Visual evidence of completed collections
 
 ---
 

@@ -15,8 +15,8 @@ const DriverDashboard = ({ reports, onStatusUpdate }) => {
     return scoreB - scoreA;
   });
 
-  const handleComplete = (reportId) => {
-    onStatusUpdate(reportId, 'completed');
+  const handleComplete = (reportId, afterPhoto, notes) => {
+    onStatusUpdate(reportId, 'completed', afterPhoto, notes);
   };
 
   return (
