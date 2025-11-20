@@ -4,6 +4,10 @@
 
 CleanConnect India is a modern web application that connects citizens with waste management services, making it easier to report and collect garbage across Indian cities. Built with React, Firebase, and Tailwind CSS.
 
+## 🌐 Live Demo
+
+**🚀 [View Live App](https://piyushhhhh.github.io/clean_india/)**
+
 ---
 
 ## ✨ Features

@@ -38,6 +38,9 @@ jobs:
           VITE_FIREBASE_CONFIG: ${{ secrets.VITE_FIREBASE_CONFIG }}
           VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
       
+      - name: Add .nojekyll file
+        run: touch dist/.nojekyll
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
