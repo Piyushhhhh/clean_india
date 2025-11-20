@@ -114,12 +114,13 @@ export const verifyGarbageImage = async (imageDataUrl) => {
     console.log('AI Detection Results:', predictions);
 
     // Check if image is empty or has very few objects
+    // NOTE: We allow images even with no detections to not block users
     if (predictions.length === 0) {
       return {
-        isValid: false,
+        isValid: true, // Changed to true - don't block users
         confidence: 0,
         detectedItems: [],
-        reason: 'No objects detected in image. Please take a clearer photo.',
+        reason: 'AI could not detect specific objects, but image is allowed. Photo will be reviewed.',
       };
     }
 
@@ -127,14 +128,17 @@ export const verifyGarbageImage = async (imageDataUrl) => {
     const detectedClasses = predictions.map(p => p.class.toLowerCase());
     const detectedItems = [...new Set(detectedClasses)]; // Remove duplicates
 
-    // Check if it's a selfie/person photo
+    // Check if it's a selfie/person photo (ONLY block if it's ONLY a person)
     const hasPerson = detectedClasses.some(cls => PERSON_ITEMS.includes(cls));
-    if (hasPerson && predictions.length === 1) {
+    const personCount = detectedClasses.filter(cls => PERSON_ITEMS.includes(cls)).length;
+    
+    // Only block if the ONLY thing detected is a person (close-up selfie)
+    if (hasPerson && predictions.length === 1 && personCount === 1) {
       return {
         isValid: false,
         confidence: predictions[0].score * 100,
         detectedItems: ['person'],
-        reason: 'Selfies or photos of people are not allowed. Please photograph the garbage location.',
+        reason: 'Please focus on the garbage location rather than people.',
       };
     }
 
@@ -148,17 +152,24 @@ export const verifyGarbageImage = async (imageDataUrl) => {
       ? (predictions.reduce((sum, p) => sum + p.score, 0) / predictions.length) * 100
       : 0;
 
-    // Accept if we detect garbage-related items OR outdoor scenes with objects
-    // (garbage can be in various contexts)
-    const isValid = hasGarbageRelated || (predictions.length > 0 && !hasPerson);
+    // Be very lenient - accept almost everything except pure selfies
+    // This is to provide helpful guidance, not to block users
+    const isValid = true; // Always allow uploads (AI is for guidance only)
+    
+    let reason = '';
+    if (hasGarbageRelated) {
+      reason = `✓ Image verified! Detected: ${detectedItems.slice(0, 3).join(', ')}${detectedItems.length > 3 ? '...' : ''}`;
+    } else if (predictions.length > 0) {
+      reason = `✓ Objects detected. Confidence: ${avgConfidence.toFixed(0)}%`;
+    } else {
+      reason = '✓ Image accepted. AI guidance unavailable for this photo.';
+    }
 
     return {
-      isValid: isValid || predictions.length >= 2, // Accept if multiple objects detected
+      isValid: true, // Always true - AI is for guidance, not blocking
       confidence: avgConfidence,
       detectedItems: detectedItems,
-      reason: isValid 
-        ? 'Image verified! Potential waste items detected.'
-        : 'Could not clearly identify waste items. Photo may still be uploaded.',
+      reason: reason,
     };
 
   } catch (error) {
