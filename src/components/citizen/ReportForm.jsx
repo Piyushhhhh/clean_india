@@ -12,10 +12,25 @@ const ReportForm = ({ onSubmit, isSubmitting }) => {
   const [description, setDescription] = useState('');
   const [severity, setSeverity] = useState('Normal');
   const [image, setImage] = useState(null);
+  const [aiVerification, setAiVerification] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ location, coords, wasteType, description, severity, image });
+    
+    // Include AI verification data in submission
+    const reportData = {
+      location,
+      coords,
+      wasteType,
+      description,
+      severity,
+      image,
+      aiVerified: aiVerification?.isValid || false,
+      aiConfidence: aiVerification?.confidence || 0,
+      aiDetectedItems: aiVerification?.detectedItems || [],
+    };
+    
+    onSubmit(reportData);
     
     // Reset form
     setLocation('');
@@ -24,6 +39,7 @@ const ReportForm = ({ onSubmit, isSubmitting }) => {
     setWasteType('General');
     setSeverity('Normal');
     setImage(null);
+    setAiVerification(null);
   };
 
   return (
@@ -60,7 +76,11 @@ const ReportForm = ({ onSubmit, isSubmitting }) => {
         </div>
 
         {/* Image Attachment */}
-        <ImageUpload image={image} setImage={setImage} />
+        <ImageUpload 
+          image={image} 
+          setImage={setImage}
+          onVerificationChange={setAiVerification}
+        />
 
         {/* Location Picker */}
         <LocationPicker 

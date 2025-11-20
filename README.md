@@ -21,6 +21,7 @@ CleanConnect India is a modern web application that connects citizens with waste
 
 ### 👥 For Citizens
 - **📸 Quick Reporting**: Snap a photo and report garbage locations in seconds
+- **🤖 AI Image Verification**: TensorFlow.js automatically verifies images contain garbage (prevents spam/selfies)
 - **📍 Smart Location**: GPS-based location detection or search from 50+ major Indian cities
 - **🏷️ Waste Classification**: Categorize waste as Dry, Wet, or Hazardous
 - **⚡ Priority Levels**: Mark urgent issues as high priority or emergency
@@ -102,6 +103,21 @@ The app will open at `http://localhost:3000`
 
 ---
 
+## 🤖 AI-Powered Features
+
+### Image Verification
+CleanConnect India uses **TensorFlow.js** with the **COCO-SSD model** to automatically verify uploaded images:
+
+- ✅ **Detects garbage/waste items** in photos (bottles, cups, packaging, etc.)
+- ❌ **Blocks selfies and person photos** to prevent spam
+- 🎯 **Provides confidence scores** and detected items list
+- ⚡ **Real-time analysis** happens instantly in the browser
+- 🔒 **Privacy-first**: All processing happens locally, no data sent to servers
+
+**See [AI_IMAGE_VERIFICATION.md](./AI_IMAGE_VERIFICATION.md) for complete documentation.**
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -145,6 +161,7 @@ clean_india/
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
 - **Backend**: Firebase (Firestore + Auth)
+- **AI/ML**: TensorFlow.js + COCO-SSD (Object Detection)
 - **Build Tool**: Vite
 - **Language**: JavaScript (ES6+)
 

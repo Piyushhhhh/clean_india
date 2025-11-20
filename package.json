@@ -7,7 +7,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "firebase": "^10.7.0",
-    "lucide-react": "^0.294.0"
+    "lucide-react": "^0.294.0",
+    "@tensorflow/tfjs": "^4.15.0",
+    "@tensorflow-models/coco-ssd": "^2.2.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.0",
