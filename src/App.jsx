@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/common/Navbar';
 import CitizenDashboard from './pages/CitizenDashboard';
 import DriverDashboard from './pages/DriverDashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import Spinner from './components/common/Spinner';
 import { useAuth } from './hooks/useAuth';
 import { useReports } from './hooks/useReports';
@@ -10,7 +11,7 @@ import { submitReport, updateReportStatus } from './services/reportService';
 function App() {
   const { user, loading: authLoading } = useAuth();
   const { reports, loading: reportsLoading } = useReports(user);
-  const [role, setRole] = useState('citizen'); // 'citizen' or 'driver'
+  const [role, setRole] = useState('citizen'); // 'citizen', 'driver', or 'admin'
   const [userPoints, setUserPoints] = useState(120);
 
   const handleSubmitReport = async (formData) => {
@@ -62,11 +63,13 @@ function App() {
               userId={user?.uid}
             />
           </>
-        ) : (
+        ) : role === 'driver' ? (
           <DriverDashboard 
             reports={reports} 
             onStatusUpdate={handleStatusUpdate} 
           />
+        ) : (
+          <AdminDashboard reports={reports} />
         )}
       </main>
       
