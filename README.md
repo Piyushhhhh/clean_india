@@ -2,11 +2,18 @@
 
 > **A community-driven waste management platform for India**
 
+[![Deploy to GitHub Pages](https://github.com/Piyushhhhh/clean_india/actions/workflows/deploy.yml/badge.svg)](https://github.com/Piyushhhhh/clean_india/actions/workflows/deploy.yml)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://piyushhhhh.github.io/clean_india/)
+[![Firebase](https://img.shields.io/badge/Firebase-Ready-orange)](https://firebase.google.com/)
+[![React](https://img.shields.io/badge/React-18-blue)](https://react.dev/)
+
 CleanConnect India is a modern web application that connects citizens with waste management services, making it easier to report and collect garbage across Indian cities. Built with React, Firebase, and Tailwind CSS.
 
 ## 🌐 Live Demo
 
-**🚀 [View Live App](https://piyushhhhh.github.io/clean_india/)**
+**🚀 [View Live App →](https://piyushhhhh.github.io/clean_india/)**
+
+> **Note:** If you see a blank page, Firebase secrets may need to be configured. See [Troubleshooting Guide](./TROUBLESHOOTING.md).
 
 ---
 
